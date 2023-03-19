@@ -33,7 +33,7 @@ resource "aws_route_table" "public_subnets_route_table" {
   vpc_id = aws_vpc.ecs_network.id
 
   route {
-    cidr_block = "10.0.0.0/24"
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.internet_gateway.id
   }
 

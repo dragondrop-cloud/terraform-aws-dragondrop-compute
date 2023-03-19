@@ -48,7 +48,7 @@ resource "aws_ecs_cluster_capacity_providers" "example" {
 resource "aws_ecs_service" "dragondrop_drift_mitigation" {
   name            = "dragondrop_drift_mitigation"
   cluster         = aws_ecs_cluster.fargate_cluster.id
-  task_definition = aws_ecs_task_definition.dragondrop-drift-task.arn
+  task_definition = aws_ecs_task_definition.dragondrop_drift_task.arn
   desired_count   = 3
   launch_type     = "FARGATE"
 
@@ -68,8 +68,8 @@ resource "aws_ecs_service" "dragondrop_drift_mitigation" {
 }
 
 // ECS Fargate Task Definition
-resource "aws_ecs_task_definition" "dragondrop-drift-task" {
-  family                   = "dragondrop-driftmitigation"
+resource "aws_ecs_task_definition" "dragondrop_drift_task" {
+  family                   = "dragondrop-drift-mitigation"
   requires_compatibilities = ["FARGATE"]
 
   // Bind mount host volumes only :check
