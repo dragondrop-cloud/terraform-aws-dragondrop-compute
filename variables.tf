@@ -1,35 +1,31 @@
 variable "region" {
-  description = "GCP region into which resources will be deployed."
+  description = "AWS region into which resources will be deployed."
   type        = string
 }
 
-variable "project" {
-  description = "GCP project name into which resources will be deployed."
-  type        = string
-}
-
-variable "cloud_run_max_instances" {
-  description = "Maximum number of Cloud Run instances to be scaled up to handle incoming requests. This value should be set to at most 2."
-  type        = string
-}
-
-variable "dragondrop_engine_cloud_run_job_name" {
-  description = "Name of the Cloud Run Job that hosts the dragondrop compute engine."
-  type        = string
-}
-
+# TODO: Update this to a public ecr path, otherwise might not work?
 variable "dragondrop_engine_container_path" {
-  description = "Path to the dragondrop engine container used in the cloud run job."
+  description = "Path to the dragondrop engine container used in the ECS Fargate job."
   type        = string
   default     = "us-east4-docker.pkg.dev/dragondrop-prod/dragondrop-engine/engine:latest"
 }
 
-variable "https_trigger_cloud_run_service_name" {
-  description = "Name of the https trigger Cloud Run service that will trigger the dragondrop 'engine' hosted in a cloud run job."
+variable "https_trigger_containerized_lambda_name" {
+  description = "Name of the https trigger containerized lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."
   type        = string
 }
 
 variable "service_account_name" {
-  description = "Name of the service account with exclusively Cloud Run Job invocation privileges that serves as the service account for the HTTPS trigger Cloud Run Job."
+  description = "Name of the service account with exclusively ECS Task invocation privileges that serves as the service account for compute created by the module."
   type        = string
+}
+
+variable "task_cpu_count" {
+  description = "Number of vCPU units that the drift mitigation task should run on."
+  type        = number
+}
+
+variable "task_memory" {
+  description = "Amount of compute memory that the drift mitigation task should run on."
+  type        = number
 }
