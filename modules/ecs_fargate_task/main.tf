@@ -45,9 +45,8 @@ resource "aws_ecs_cluster_capacity_providers" "example" {
 # TODO: When using a public subnet, you can assign a public IP address to the task ENI.
 
 # ECS Fargate Service
-// https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service
-resource "aws_ecs_service" "mongo" {
-  name            = "mongodb"
+resource "aws_ecs_service" "dragondrop_drift_mitigation" {
+  name            = "dragondrop_drift_mitigation"
   cluster         = aws_ecs_cluster.fargate_cluster.id
   task_definition = aws_ecs_task_definition.dragondrop-drift-task.arn
   desired_count   = 3
