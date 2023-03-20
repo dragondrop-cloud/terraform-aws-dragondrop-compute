@@ -73,6 +73,8 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
   family                   = "dragondrop-drift-mitigation"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
+  cpu       = var.task_cpu_count
+  memory    = var.task_memory
 
   // Bind mount host volumes only :check
   container_definitions = jsonencode([{
