@@ -3,13 +3,8 @@ variable "dragondrop_engine_container_path" {
   type        = string
 }
 
-variable "security_group" {
-  description = "Security group for ECS fargate task networking."
-  type        = string
-}
-
-variable "subnet" {
-  description = "Subnet within which the ECS Fargate Task is placed."
+variable "region" {
+  description = "AWS region into which resources are to be deployed."
   type        = string
 }
 
