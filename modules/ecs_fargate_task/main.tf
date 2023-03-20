@@ -14,6 +14,7 @@ resource "aws_ecs_cluster" "fargate_cluster" {
 
   configuration {
     execute_command_configuration {
+      logging = "OVERRIDE"
 
       log_configuration {
         cloud_watch_encryption_enabled = true
@@ -71,6 +72,7 @@ resource "aws_ecs_service" "dragondrop_drift_mitigation" {
 resource "aws_ecs_task_definition" "dragondrop_drift_task" {
   family                   = "dragondrop-drift-mitigation"
   requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
 
   // Bind mount host volumes only :check
   container_definitions = jsonencode([{
