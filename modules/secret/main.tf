@@ -4,5 +4,5 @@ resource "aws_secretsmanager_secret" "secret" {
 
 resource "aws_secretsmanager_secret_version" "default_version" {
   secret_id     = aws_secretsmanager_secret.secret.id
-  secret_string = ""
+  secret_string = "placeholder"
 }
