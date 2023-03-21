@@ -35,22 +35,22 @@ module "vcs_token_secret" {
 
 module "vcs_user_secret" {
   source = "../secret"
-  name   = vcs_user
+  name   = "vcs_user"
 }
 
 module "vcs_repo_secret" {
   source = "../secret"
-  name   = vcs_repo
+  name   = "vcs_repo"
 }
 
 module "vcs_system_secret" {
   source = "../secret"
-  name   = vcs_system
+  name   = "vcs_system"
 }
 
 module "vcs_base_branch_secret" {
   source = "../secret"
-  name   = vcs_base_branch
+  name   = "vcs_base_branch"
 }
 
 module "state_backend_secret" {
