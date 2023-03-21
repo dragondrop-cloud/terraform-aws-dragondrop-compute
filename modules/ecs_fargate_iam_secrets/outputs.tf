@@ -12,3 +12,8 @@ output "policy_log_creator_arn" {
   description = "ARN for the IAM policy to create logs."
   value       = aws_iam_policy.log_creator.arn
 }
+
+# Secrets ARN Output
+output "division_to_provider_secret_arn" {
+  value = module.division_to_provider_secret.arn
+}

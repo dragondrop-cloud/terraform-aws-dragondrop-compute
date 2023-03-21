@@ -46,8 +46,8 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
 
     environment = [
       {
-        name  = "EXAMPLE_TEST"
-        value = "TEST_VALUE"
+        name      = "DRAGONDROP_DIVISONTOPROVIDER"
+        valueFrom = module.ecs_fargate_iam_secrets.division_to_provider_secret_arn
       }
     ],
 
