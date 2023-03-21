@@ -18,11 +18,11 @@ module "ecs_fargate_task" {
 module "containerized_lambda_https_endpoint" {
   source = "./modules/containerized_lambda_https_endpoint"
 
-  ecs_task_arn = module.ecs_fargate_task.ecs_task_arn
-  iam_policy_log_creator_arn = module.ecs_fargate_task.log_creator_policy_arn
+  ecs_task_arn                   = module.ecs_fargate_task.ecs_task_arn
+  iam_policy_log_creator_arn     = module.ecs_fargate_task.log_creator_policy_arn
   lambda_role_assume_policy_json = module.ecs_fargate_task.lambda_role_assume_policy_json
-  security_group_id                   = module.vpc_subnet_with_internet_access.security_group
-  subnet_id                           = module.vpc_subnet_with_internet_access.subnet
+  security_group_id              = module.vpc_subnet_with_internet_access.security_group
+  subnet_id                      = module.vpc_subnet_with_internet_access.subnet
 
   depends_on = [module.vpc_subnet_with_internet_access, module.ecs_fargate_task]
 }

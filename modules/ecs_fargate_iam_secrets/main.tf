@@ -1,76 +1,76 @@
 module "division_to_provider_secret" {
   source = "../secret"
-  name = "division_to_provider"
+  name   = "division_to_provider"
 }
 
 module "division_cloud_credentials_secret" {
   source = "../secret"
-  name = "division_cloud_credentials"
+  name   = "division_cloud_credentials"
 }
 
 module "providers_secret" {
   source = "../secret"
-  name = "providers_secret"
+  name   = "providers_secret"
 }
 
 module "terraform_version_secret" {
   source = "../secret"
-  name = "terraform_version"
+  name   = "terraform_version"
 }
 
 module "workspace_to_directory_secret" {
   source = "../secret"
-  name = "workspace_to_directory"
+  name   = "workspace_to_directory"
 }
 
 module "migration_history_storage_secret" {
   source = "../secret"
-  name = "migration_history_storage"
+  name   = "migration_history_storage"
 }
 
 module "vcs_token_secret" {
   source = "../secret"
-  name = "vcs_token"
+  name   = "vcs_token"
 }
 
 module "vcs_user_secret" {
   source = "../secret"
-  name = vcs_user
+  name   = vcs_user
 }
 
 module "vcs_repo_secret" {
   source = "../secret"
-  name = vcs_repo
+  name   = vcs_repo
 }
 
 module "vcs_system_secret" {
   source = "../secret"
-  name = vcs_system
+  name   = vcs_system
 }
 
 module "vcs_base_branch_secret" {
   source = "../secret"
-  name = vcs_base_branch
+  name   = vcs_base_branch
 }
 
 module "state_backend_secret" {
   source = "../secret"
-  name = "state_backend"
+  name   = "state_backend"
 }
 
 module "terraform_cloud_organization_secret" {
   source = "../secret"
-  name = "terraform_cloud_organization"
+  name   = "terraform_cloud_organization"
 }
 
 module "terraform_cloud_token_secret" {
   source = "../secret"
-  name = "terraform_cloud_token"
+  name   = "terraform_cloud_token"
 }
 
 module "job_token_secret" {
   source = "../secret"
-  name = "job_token"
+  name   = "job_token"
 }
 
 resource "aws_iam_policy" "log_creator" {

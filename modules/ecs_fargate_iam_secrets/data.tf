@@ -1,12 +1,12 @@
 data "aws_iam_policy_document" "log_creator" {
-    statement {
-      actions = [
-        "logs:CreateLogStream",
-        "logs:PutLogEvents"
-      ]
-      effect    = "Allow"
-      resources = ["*"]
-    }
+  statement {
+    actions = [
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
+    effect    = "Allow"
+    resources = ["*"]
+  }
 }
 
 data "aws_iam_policy_document" "secret_reader" {
@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "secret_reader" {
     actions = [
       "secretsmanager:GetSecretValue",
     ]
-    effect    = "Allow"
+    effect = "Allow"
     resources = [
       module.division_to_provider_secret.arn,
       module.division_cloud_credentials_secret.arn,
