@@ -1,28 +1,14 @@
-# TODO: This whole chunk can also possibly be depricated.
-# Creating the ECS Cluster
-#resource "aws_cloudwatch_log_group" "ecs_fargate" {
-#  name              = "/aws/ecs/dragondrop-job-scan"
-#  retention_in_days = 7
-#
-#  tags = {
-#    origin = "dragondrop-compute-module"
-#  }
-#}
+// Defining Secrets and the IAM policies and roles needs
+module "ecs_fargate_iam_secrets" {
+  source = "../ecs_fargate_iam_secrets"
 
+  log_creator_policy_name   = "log_creator"
+  secret_reader_policy_name = "secret_reader"
+}
 
+// ECS provisioning
 resource "aws_ecs_cluster" "fargate_cluster" {
   name = "dragondrop-ecs-fargate-cluster"
-
-#  configuration {
-#    execute_command_configuration {
-#      logging = "OVERRIDE"
-#
-#      log_configuration {
-#        cloud_watch_encryption_enabled = true
-#        cloud_watch_log_group_name     = aws_cloudwatch_log_group.ecs_fargate.name
-#      }
-#    }
-#  }
 
   tags = {
     origin = "dragondrop-compute-module"
@@ -41,44 +27,14 @@ resource "aws_ecs_cluster_capacity_providers" "example" {
   }
 }
 
-#resource "aws_ecs_service" {
-# For a task on Fargate to pull a container image, the task must have a route to the internet.
-# The following describes how you can verify that your task has a route to the internet.
-# TODO: When using a public subnet, you can assign a public IP address to the task ENI.
-
-# TODO: Can likely permanently remove all of this code as it does not appear to be necessary, just the task
-# TODO: definition.
-# ECS Fargate Job
-#resource "aws_ecs_service" "dragondrop_drift_mitigation" {
-#  name            = "dragondrop_drift_mitigation"
-#  cluster         = aws_ecs_cluster.fargate_cluster.id
-#  task_definition = aws_ecs_task_definition.dragondrop_drift_task.arn
-#  desired_count   = 3
-#  launch_type     = "FARGATE"
-#
-#  # TODO: Build out once an initial, baseline deployment of just the ECS task fully deploying.
-#  #  iam_role   = aws_iam_role.foo.arn
-#  #  depends_on = [aws_iam_role_policy.foo]
-#
-#  network_configuration {
-#    subnets          = [var.subnet]
-#    security_groups  = [var.security_group]
-#    assign_public_ip = true
-#  }
-#
-#  tags = {
-#    "origin" : "dragondrop-compute-module"
-#  }
-#}
-
 // ECS Fargate Task Definition
 resource "aws_ecs_task_definition" "dragondrop_drift_task" {
   family                   = "dragondrop-drift-mitigation"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
-  cpu       = var.task_cpu_count
-  memory    = var.task_memory
-#  task_role_arn = "" TODO: Pass in the locked down Role here once created
+  cpu                      = var.task_cpu_count
+  memory                   = var.task_memory
+  task_role_arn            = module.ecs_fargate_iam_secrets.role_ecs_fargate_task_arn
 
   // Bind mount host volumes only :check
   container_definitions = jsonencode([{
@@ -98,10 +54,10 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
     logConfiguration = {
       logDriver = "awslogs",
       options = {
-        awslogs-group: "dragondrop-fargate-container",
-        awslogs-region: var.region,
-        awslogs-create-group: "true",
-        awslogs-stream-prefix: "dragondrop"
+        awslogs-group : "dragondrop-fargate-container",
+        awslogs-region : var.region,
+        awslogs-create-group : "true",
+        awslogs-stream-prefix : "dragondrop"
       }
     }
 
