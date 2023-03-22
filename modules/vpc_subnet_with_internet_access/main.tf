@@ -8,42 +8,7 @@ resource "aws_vpc" "ecs_network" {
   }
 }
 
-resource "aws_internet_gateway" "internet_gateway" {
-  vpc_id = aws_vpc.ecs_network.id
-
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
-}
-
-# Creating a Public Subnet with access to the internet
-resource "aws_subnet" "public_subnet" {
-  vpc_id                  = aws_vpc.ecs_network.id
-  cidr_block              = "10.0.0.0/24"
-  map_public_ip_on_launch = true
-
-  tags = {
-    origin = "dragondrop-compute-module"
-    name   = "ecs fargate subnet"
-  }
-}
-
-# Routes definition
-resource "aws_route_table" "public_subnets_route_table" {
-  vpc_id = aws_vpc.ecs_network.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.internet_gateway.id
-  }
-
-  tags = {
-    origin = "dragondrop-compute-module"
-    name   = "ecs fargate routes table"
-  }
-}
-
-# Add Security Group + Rules
+# Add Security Group + Rules to the VPC
 resource "aws_security_group" "ecs_fargate_sg" {
   name        = "dragondrop-compute-ecs-fargate-sg"
   description = "Allow unrestricted outbound egress"
@@ -61,4 +26,45 @@ resource "aws_security_group_rule" "egress" {
   to_port           = 0
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
+}
+
+
+# Routes table definition to internet
+resource "aws_internet_gateway" "internet_gateway" {
+  vpc_id = aws_vpc.ecs_network.id
+
+  tags = {
+    origin = "dragondrop-compute-module"
+  }
+}
+
+resource "aws_route_table" "public_subnets_route_table" {
+  vpc_id = aws_vpc.ecs_network.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.internet_gateway.id
+  }
+
+  tags = {
+    origin = "dragondrop-compute-module"
+    name   = "ecs fargate routes table"
+  }
+}
+
+# Creating a Public Subnet with access to the internet
+resource "aws_subnet" "public_subnet" {
+  vpc_id                  = aws_vpc.ecs_network.id
+  cidr_block              = "10.0.0.0/24"
+  map_public_ip_on_launch = true
+
+  tags = {
+    origin = "dragondrop-compute-module"
+    name   = "ecs fargate subnet"
+  }
+}
+
+resource "aws_route_table_association" "link_public_access_route_table" {
+  subnet_id      = aws_subnet.public_subnet.id
+  route_table_id = aws_route_table.public_subnets_route_table.id
 }

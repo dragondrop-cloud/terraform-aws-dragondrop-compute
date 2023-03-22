@@ -1,6 +1,7 @@
 data "aws_iam_policy_document" "log_creator" {
   statement {
     actions = [
+      "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
