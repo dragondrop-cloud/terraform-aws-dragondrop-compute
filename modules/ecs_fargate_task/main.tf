@@ -35,6 +35,7 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
   cpu                      = var.task_cpu_count
   memory                   = var.task_memory
   task_role_arn            = module.ecs_fargate_iam_secrets.role_ecs_fargate_task_arn
+  execution_role_arn       = module.ecs_fargate_iam_secrets.role_ecs_fargate_task_arn
 
   // Bind mount host volumes only :check
   container_definitions = jsonencode([{
