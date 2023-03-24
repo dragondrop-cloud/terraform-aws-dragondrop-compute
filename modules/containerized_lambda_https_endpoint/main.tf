@@ -32,7 +32,7 @@ resource "aws_lambda_function" "request_handler" {
   image_uri   = var.lambda_ecr_container_uri
   memory_size = 512
 
-  environment = {
+  environment {
     variables = {
       SUBNET          = var.subnet_id,
       SECURITY_GROUP  = var.security_group_id
