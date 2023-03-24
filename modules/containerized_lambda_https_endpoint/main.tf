@@ -32,6 +32,8 @@ resource "aws_lambda_function" "request_handler" {
   package_type = "Zip"
   s3_bucket    = var.lambda_s3_bucket_name
   s3_key       = "dragondrop_https_trigger_lambda.zip"
+  handler      = "app.handler"
+  runtime      = "python3.9"
   memory_size  = 512
 
   environment {
