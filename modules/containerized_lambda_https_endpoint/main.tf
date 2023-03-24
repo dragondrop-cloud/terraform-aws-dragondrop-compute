@@ -1,16 +1,44 @@
 # Forming the complete role for the lambda function to assume
+resource "aws_iam_policy" "dragondrop_fargate_task_executor" {
+  name   = "dragondrop-fargate-task-executor"
+  path   = "/"
+  policy = data.aws_iam_policy_document.ecs_task_executor.json
 
+  tags = {
+    origin = "dragondrop-compute-module"
+  }
+
+  depends_on = [data.aws_iam_policy_document.ecs_task_executor]
+}
+
+resource "aws_iam_role" "dragondrop_lambda_https_trigger" {
+  assume_role_policy    = var.lambda_role_assume_policy_json
+  description           = "Role assumed by the Lambda HTTPS trigger for dragondrop."
+  force_detach_policies = false
+  name                  = "dragondrop-fargate-runner"
+  managed_policy_arns   = [var.iam_policy_log_creator_arn, aws_iam_policy.dragondrop_fargate_task_executor.arn]
+
+  tags = {
+    origin = "dragondrop-compute-module"
+  }
+}
 
 # Creating the actual lambda function and the corresponding HTTPS endpoint.
 resource "aws_lambda_function" "request_handler" {
   function_name = var.https_trigger_containerized_lambda_name
   description   = "Lambda that handles inbound HTTP trigger"
 
-  role        = "" # TODO: Lambda IAM Role needed here
+  role        = aws_iam_role.dragondrop_lambda_https_trigger.arn
   image_uri   = var.lambda_ecr_container_uri
   memory_size = 512
 
-  #  environment = {} TODO: Is this needed at all?
+  environment = {
+    variables = {
+      SUBNET          = var.subnet_id,
+      SECURITY_GROUP  = var.security_group_id
+      TASK_DEFINITION = var.ecs_task_arn
+    }
+  }
 
   vpc_config {
     security_group_ids = [var.security_group_id]
