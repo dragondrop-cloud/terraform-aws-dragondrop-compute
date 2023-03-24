@@ -28,9 +28,10 @@ resource "aws_lambda_function" "request_handler" {
   function_name = var.https_trigger_containerized_lambda_name
   description   = "Lambda that handles inbound HTTP trigger"
 
-  role        = aws_iam_role.dragondrop_lambda_https_trigger.arn
-  image_uri   = var.lambda_ecr_container_uri
-  memory_size = 512
+  role         = aws_iam_role.dragondrop_lambda_https_trigger.arn
+  package_type = "Image"
+  image_uri    = var.lambda_ecr_container_uri
+  memory_size  = 512
 
   environment {
     variables = {
