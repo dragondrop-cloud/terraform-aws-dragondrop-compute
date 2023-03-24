@@ -1,10 +1,25 @@
+variable "dragondrop_api" {
+  description = "URL for the dragondrop API, used for controlling allowed origins on the Lambda URL."
+  type        = string
+}
+
 variable "ecs_task_arn" {
   description = "ARN for the dragondrop-created ECS Fargate Task"
   type        = string
 }
 
+variable "https_trigger_containerized_lambda_name" {
+  description = "Name of the https trigger containerized lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."
+  type        = string
+}
+
 variable "iam_policy_log_creator_arn" {
   description = "ARN for the IAM policy to create logs."
+  type        = string
+}
+
+variable "lambda_ecr_container_uri" {
+  description = "Lambda public ECR container URI to reference."
   type        = string
 }
 
