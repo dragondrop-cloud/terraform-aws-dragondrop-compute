@@ -29,8 +29,9 @@ resource "aws_lambda_function" "request_handler" {
   description   = "Lambda that handles inbound HTTP trigger"
 
   role         = aws_iam_role.dragondrop_lambda_https_trigger.arn
-  package_type = "Image"
-  image_uri    = var.lambda_ecr_container_uri
+  package_type = "Zip"
+  s3_bucket    = var.lambda_s3_bucket_name
+  s3_key       = "dragondrop_https_trigger_lambda.zip"
   memory_size  = 512
 
   environment {

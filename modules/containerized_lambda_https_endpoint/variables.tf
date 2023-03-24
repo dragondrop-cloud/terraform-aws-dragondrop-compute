@@ -18,7 +18,7 @@ variable "iam_policy_log_creator_arn" {
   type        = string
 }
 
-variable "lambda_ecr_container_uri" {
+variable "lambda_s3_bucket_name" {
   description = "Lambda public ECR container URI to reference."
   type        = string
 }

@@ -22,7 +22,7 @@ module "containerized_lambda_https_endpoint" {
   https_trigger_containerized_lambda_name = var.https_trigger_containerized_lambda_name
   iam_policy_log_creator_arn              = module.ecs_fargate_task.log_creator_policy_arn
   lambda_role_assume_policy_json          = module.ecs_fargate_task.lambda_role_assume_policy_json
-  lambda_ecr_container_uri                = var.lambda_ecr_container_uri
+  lambda_s3_bucket_name                   = var.lambda_s3_bucket_name
   security_group_id                       = module.vpc_subnet_with_internet_access.security_group
   subnet_id                               = module.vpc_subnet_with_internet_access.subnet
 

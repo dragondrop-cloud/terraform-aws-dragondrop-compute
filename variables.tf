@@ -15,9 +15,10 @@ variable "https_trigger_containerized_lambda_name" {
   type        = string
 }
 
-variable "lambda_ecr_container_uri" {
+variable "lambda_s3_bucket_name" {
   description = "Lambda public ECR container URI to reference."
   type        = string
+  default     = "dragondrop-ecs-fargate-task-lambda-trigger-prod"
 }
 
 variable "region" {
