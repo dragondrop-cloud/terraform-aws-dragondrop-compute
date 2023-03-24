@@ -15,7 +15,7 @@ resource "aws_iam_role" "dragondrop_lambda_https_trigger" {
   assume_role_policy    = var.lambda_role_assume_policy_json
   description           = "Role assumed by the Lambda HTTPS trigger for dragondrop."
   force_detach_policies = false
-  name                  = "dragondrop-fargate-runner"
+  name                  = "dragondrop-lambda-https-trigger"
   managed_policy_arns   = [var.iam_policy_log_creator_arn, aws_iam_policy.dragondrop_fargate_task_executor.arn]
 
   tags = {
