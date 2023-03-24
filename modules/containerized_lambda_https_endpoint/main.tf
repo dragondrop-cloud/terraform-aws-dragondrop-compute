@@ -67,3 +67,8 @@ resource "aws_lambda_function_url" "dragondrop_https_endpoint" {
     max_age           = 60
   }
 }
+
+resource "aws_iam_role_policy_attachment" "aws_lambda_vpc_access_execution_role" {
+  role       = aws_iam_role.dragondrop_lambda_https_trigger.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+}
