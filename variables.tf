@@ -1,9 +1,9 @@
-variable "region" {
-  description = "AWS region into which resources will be deployed."
+variable "dragondrop_api" {
+  description = "URL for the dragondrop API, used for controlling allowed origins on the Lambda URL."
   type        = string
+  default     = "https://api.dragondrop.cloud"
 }
 
-# TODO: Update this to a public ecr path, otherwise might not work?
 variable "dragondrop_engine_container_path" {
   description = "Path to the dragondrop engine container used in the ECS Fargate job."
   type        = string
@@ -12,6 +12,16 @@ variable "dragondrop_engine_container_path" {
 
 variable "https_trigger_containerized_lambda_name" {
   description = "Name of the https trigger containerized lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."
+  type        = string
+}
+
+variable "lambda_ecr_container_uri" {
+  description = "Lambda public ECR container URI to reference."
+  type        = string
+}
+
+variable "region" {
+  description = "AWS region into which resources will be deployed."
   type        = string
 }
 
