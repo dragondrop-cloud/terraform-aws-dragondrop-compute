@@ -88,7 +88,7 @@ data "aws_iam_policy_document" "fargate_runner_pass_role" {
       "iam:PassRole"
     ]
     effect    = "Allow"
-    resources = [aws_iam_role.dragondrop_fargate_runner]
+    resources = [aws_iam_role.dragondrop_fargate_runner.arn]
   }
 
   depends_on = [aws_iam_role.dragondrop_fargate_runner]

@@ -111,7 +111,7 @@ resource "aws_iam_role" "dragondrop_fargate_runner" {
 resource "aws_iam_policy" "dragondrop_fargate_runner_pass_role" {
   name   = "dragondrop-pass-role-of-fargate-runner"
   path   = "/"
-  policy = data.aws_iam_policy_document.secret_reader.json
+  policy = data.aws_iam_policy_document.fargate_runner_pass_role.json
 
   tags = {
     origin = "dragondrop-compute-module"
