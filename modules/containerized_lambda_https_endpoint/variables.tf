@@ -3,6 +3,16 @@ variable "dragondrop_api" {
   type        = string
 }
 
+variable "ecs_cluster_arn" {
+  description = "ARN for the dragondrop-created ECS Cluster."
+  type        = string
+}
+
+variable "ecs_fargate_task_container_name" {
+  description = "Name of the ecs fargate task container."
+  type        = string
+}
+
 variable "ecs_task_arn" {
   description = "ARN for the dragondrop-created ECS Fargate Task"
   type        = string

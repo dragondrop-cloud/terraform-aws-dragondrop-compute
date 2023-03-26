@@ -1,3 +1,8 @@
+output "ecs_cluster_arn" {
+  description = "ARN for the dragondrop-created ECS Cluster."
+  value       = aws_ecs_cluster.fargate_cluster.arn
+}
+
 output "ecs_task_arn" {
   description = "ARN for the ECS Fargate Task."
   value       = aws_ecs_task_definition.dragondrop_drift_task.arn

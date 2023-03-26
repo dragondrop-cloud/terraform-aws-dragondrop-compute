@@ -1,3 +1,4 @@
+# Variables with default values
 variable "dragondrop_api" {
   description = "URL for the dragondrop API, used for controlling allowed origins on the Lambda URL."
   type        = string
@@ -10,15 +11,23 @@ variable "dragondrop_engine_container_path" {
   default     = "us-east4-docker.pkg.dev/dragondrop-prod/dragondrop-engine/engine:latest"
 }
 
-variable "https_trigger_containerized_lambda_name" {
-  description = "Name of the https trigger containerized lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."
+variable "ecs_fargate_task_container_name" {
+  description = "Name of the ecs fargate task container."
   type        = string
+  default     = "dragondrop-drift-mitigation-engine"
 }
 
 variable "lambda_s3_bucket_name" {
   description = "Lambda public ECR container URI to reference."
   type        = string
   default     = "dragondrop-ecs-fargate-task-lambda-trigger-prod"
+}
+
+
+# Required variables for module
+variable "https_trigger_containerized_lambda_name" {
+  description = "Name of the https trigger containerized lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."
+  type        = string
 }
 
 variable "region" {

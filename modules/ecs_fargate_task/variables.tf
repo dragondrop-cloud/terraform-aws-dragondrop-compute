@@ -3,6 +3,11 @@ variable "dragondrop_engine_container_path" {
   type        = string
 }
 
+variable "ecs_fargate_task_container_name" {
+  description = "Name of the ecs fargate task container."
+  type        = string
+}
+
 variable "region" {
   description = "AWS region into which resources are to be deployed."
   type        = string
