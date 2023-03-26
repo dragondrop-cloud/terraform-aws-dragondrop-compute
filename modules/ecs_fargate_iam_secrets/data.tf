@@ -80,3 +80,16 @@ data "aws_iam_policy_document" "lambda_assume_role_policy" {
     }
   }
 }
+
+data "aws_iam_policy_document" "fargate_runner_pass_role" {
+  statement {
+    actions = [
+      "iam:GetRole",
+      "iam:PassRole"
+    ]
+    effect    = "Allow"
+    resources = [aws_iam_role.dragondrop_fargate_runner.arn]
+  }
+
+  depends_on = [aws_iam_role.dragondrop_fargate_runner]
+}

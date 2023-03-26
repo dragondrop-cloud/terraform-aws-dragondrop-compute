@@ -8,6 +8,11 @@ variable "ecs_task_arn" {
   type        = string
 }
 
+variable "iam_policy_ecs_fargate_task_pass_role_arn" {
+  description = "ARN for the IAM policy to pass the role used by the ECS Fargate Task."
+  type        = string
+}
+
 variable "https_trigger_containerized_lambda_name" {
   description = "Name of the https trigger containerized lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."
   type        = string

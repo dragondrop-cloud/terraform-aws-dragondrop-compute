@@ -106,3 +106,16 @@ resource "aws_iam_role" "dragondrop_fargate_runner" {
     origin = "dragondrop-compute-module"
   }
 }
+
+# Creating the policy to pass aws_iam_role.
+resource "aws_iam_policy" "dragondrop_fargate_runner_pass_role" {
+  name   = "dragondrop-pass-role-of-fargate-runner"
+  path   = "/"
+  policy = data.aws_iam_policy_document.fargate_runner_pass_role.json
+
+  tags = {
+    origin = "dragondrop-compute-module"
+  }
+
+  depends_on = [data.aws_iam_policy_document.fargate_runner_pass_role]
+}

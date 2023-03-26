@@ -12,3 +12,8 @@ output "lambda_role_assume_policy_json" {
   description = "JSON for the Lambda assume role policy."
   value       = module.ecs_fargate_iam_secrets.lambda_role_assume_policy_json
 }
+
+output "policy_pass_role_ecs_fargate_task_arn" {
+  description = "ARN for the IAM policy to pass the role from the ECS Fargate Task."
+  value       = module.ecs_fargate_iam_secrets.policy_pass_role_ecs_fargate_task_arn
+}
