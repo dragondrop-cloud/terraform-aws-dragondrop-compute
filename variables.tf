@@ -14,7 +14,7 @@ variable "dragondrop_engine_container_path" {
 variable "ecs_fargate_task_container_name" {
   description = "Name of the ecs fargate task container."
   type        = string
-  default     = "dragondrop-driftmitigation-task"
+  default     = "dragondrop-drift-mitigation-engine"
 }
 
 variable "lambda_s3_bucket_name" {

@@ -37,10 +37,9 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
   task_role_arn            = module.ecs_fargate_iam_secrets.role_ecs_fargate_task_arn
   execution_role_arn       = module.ecs_fargate_iam_secrets.role_ecs_fargate_task_arn
 
-  # TODO: Make a top-level var
   // Bind mount host volumes only
   container_definitions = jsonencode([{
-    name      = "dragondrop-driftmitigation-task"
+    name      = var.ecs_fargate_task_container_name
     image     = var.dragondrop_engine_container_path
     cpu       = var.task_cpu_count
     memory    = var.task_memory
