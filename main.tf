@@ -15,8 +15,8 @@ module "ecs_fargate_task" {
   depends_on = [module.vpc_subnet_with_internet_access]
 }
 
-module "containerized_lambda_https_endpoint" {
-  source = "./modules/containerized_lambda_https_endpoint"
+module "lambda_https_endpoint" {
+  source = "./modules/lambda_https_endpoint"
 
   dragondrop_api                            = var.dragondrop_api
   ecs_cluster_arn                           = module.ecs_fargate_task.ecs_cluster_arn

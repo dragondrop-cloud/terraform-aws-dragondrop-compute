@@ -39,6 +39,7 @@ resource "aws_lambda_function" "request_handler" {
   handler      = "app.handler"
   runtime      = "python3.9"
   memory_size  = 512
+  timeout      = 120
 
   environment {
     variables = {
