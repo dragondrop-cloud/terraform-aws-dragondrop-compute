@@ -42,7 +42,7 @@ resource "aws_lambda_function" "request_handler" {
 
   environment {
     variables = {
-      CONTAINER_NAME  = var.container_name
+      CONTAINER_NAME  = var.ecs_fargate_task_container_name
       ECS_CLUSTER_ARN = var.ecs_cluster_arn,
       SUBNET          = var.subnet_id,
       SECURITY_GROUP  = var.security_group_id
