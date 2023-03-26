@@ -51,11 +51,6 @@ resource "aws_lambda_function" "request_handler" {
     }
   }
 
-  vpc_config {
-    security_group_ids = [var.security_group_id]
-    subnet_ids         = [var.subnet_id]
-  }
-
   tags = {
     origin = "dragondrop-compute-module"
   }
