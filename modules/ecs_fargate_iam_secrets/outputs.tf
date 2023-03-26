@@ -8,6 +8,11 @@ output "role_ecs_fargate_task_arn" {
   value       = aws_iam_role.dragondrop_fargate_runner.arn
 }
 
+output "policy_pass_role_ecs_fargate_task_arn" {
+  description = "ARN for the IAM policy to pass the role from the ECS Fargate Task."
+  value       = aws_iam_policy.dragondrop_fargate_runner_pass_role.arn
+}
+
 output "policy_log_creator_arn" {
   description = "ARN for the IAM policy to create logs."
   value       = aws_iam_policy.log_creator.arn

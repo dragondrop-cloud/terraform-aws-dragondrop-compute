@@ -16,7 +16,11 @@ resource "aws_iam_role" "dragondrop_lambda_https_trigger" {
   description           = "Role assumed by the Lambda HTTPS trigger for dragondrop."
   force_detach_policies = false
   name                  = "dragondrop-lambda-https-trigger"
-  managed_policy_arns   = [var.iam_policy_log_creator_arn, aws_iam_policy.dragondrop_fargate_task_executor.arn]
+  managed_policy_arns = [
+    var.iam_policy_log_creator_arn,
+    var.iam_policy_ecs_fargate_task_pass_role_arn,
+    aws_iam_policy.dragondrop_fargate_task_executor.arn
+  ]
 
   tags = {
     origin = "dragondrop-compute-module"
