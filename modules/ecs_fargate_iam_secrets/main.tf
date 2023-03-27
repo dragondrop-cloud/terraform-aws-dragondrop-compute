@@ -1,76 +1,91 @@
 module "division_to_provider_secret" {
   source = "../secret"
   name   = "division_to_provider"
+  tags   = var.tags
 }
 
 module "division_cloud_credentials_secret" {
   source = "../secret"
   name   = "division_cloud_credentials"
+  tags   = var.tags
 }
 
 module "providers_secret" {
   source = "../secret"
   name   = "providers_secret"
+  tags   = var.tags
 }
 
 module "terraform_version_secret" {
   source = "../secret"
   name   = "terraform_version"
+  tags   = var.tags
 }
 
 module "workspace_to_directory_secret" {
   source = "../secret"
   name   = "workspace_to_directory"
+  tags   = var.tags
 }
 
 module "migration_history_storage_secret" {
   source = "../secret"
   name   = "migration_history_storage"
+  tags   = var.tags
 }
 
 module "vcs_token_secret" {
   source = "../secret"
   name   = "vcs_token"
+  tags   = var.tags
 }
 
 module "vcs_user_secret" {
   source = "../secret"
   name   = "vcs_user"
+  tags   = var.tags
 }
 
 module "vcs_repo_secret" {
   source = "../secret"
   name   = "vcs_repo"
+  tags   = var.tags
 }
 
 module "vcs_system_secret" {
   source = "../secret"
   name   = "vcs_system"
+  tags   = var.tags
 }
 
 module "vcs_base_branch_secret" {
   source = "../secret"
   name   = "vcs_base_branch"
+  tags   = var.tags
 }
 
 module "state_backend_secret" {
   source = "../secret"
   name   = "state_backend"
+  tags   = var.tags
 }
 
 module "terraform_cloud_organization_secret" {
   source = "../secret"
   name   = "terraform_cloud_organization"
+  tags   = var.tags
 }
 
 module "terraform_cloud_token_secret" {
   source = "../secret"
   name   = "terraform_cloud_token"
+  tags   = var.tags
 }
 
 module "job_token_secret" {
   source = "../secret"
   name   = "job_token"
+  tags   = var.tags
 }
 
 resource "aws_iam_policy" "log_creator" {
@@ -78,9 +93,10 @@ resource "aws_iam_policy" "log_creator" {
   path   = "/"
   policy = data.aws_iam_policy_document.log_creator.json
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }
 
 resource "aws_iam_policy" "dragondrop_secret_reader" {
@@ -88,9 +104,10 @@ resource "aws_iam_policy" "dragondrop_secret_reader" {
   path   = "/"
   policy = data.aws_iam_policy_document.secret_reader.json
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 
   depends_on = [data.aws_iam_policy_document.secret_reader]
 }
@@ -102,9 +119,10 @@ resource "aws_iam_role" "dragondrop_fargate_runner" {
   name                  = "dragondrop-fargate-runner"
   managed_policy_arns   = [aws_iam_policy.log_creator.arn, aws_iam_policy.dragondrop_secret_reader.arn]
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }
 
 # Creating the policy to pass aws_iam_role.
@@ -113,9 +131,10 @@ resource "aws_iam_policy" "dragondrop_fargate_runner_pass_role" {
   path   = "/"
   policy = data.aws_iam_policy_document.fargate_runner_pass_role.json
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 
   depends_on = [data.aws_iam_policy_document.fargate_runner_pass_role]
 }

@@ -13,6 +13,12 @@ variable "region" {
   type        = string
 }
 
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default     = {}
+}
+
 variable "task_cpu_count" {
   description = "Number of vCPU units that the drift mitigation task should run on."
   type        = number

@@ -4,9 +4,10 @@ resource "aws_iam_policy" "dragondrop_fargate_task_executor" {
   path   = "/"
   policy = data.aws_iam_policy_document.ecs_task_executor.json
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 
   depends_on = [data.aws_iam_policy_document.ecs_task_executor]
 }
@@ -22,9 +23,10 @@ resource "aws_iam_role" "dragondrop_lambda_https_trigger" {
     aws_iam_policy.dragondrop_fargate_task_executor.arn
   ]
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }
 
 # Creating the actual lambda function and the corresponding HTTPS endpoint.
@@ -51,9 +53,10 @@ resource "aws_lambda_function" "request_handler" {
     }
   }
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }
 
 resource "aws_lambda_function_url" "dragondrop_https_endpoint" {

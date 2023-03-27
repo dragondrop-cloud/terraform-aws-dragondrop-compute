@@ -4,15 +4,17 @@ module "ecs_fargate_iam_secrets" {
 
   log_creator_policy_name   = "log_creator"
   secret_reader_policy_name = "secret_reader"
+  tags                      = var.tags
 }
 
 // ECS provisioning
 resource "aws_ecs_cluster" "fargate_cluster" {
   name = "dragondrop-ecs-fargate-cluster"
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }
 
 resource "aws_ecs_cluster_capacity_providers" "example" {
@@ -75,7 +77,8 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
     cpu_architecture        = "X86_64"
   }
 
-  tags = {
-    "origin" : "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }

@@ -3,9 +3,10 @@ resource "aws_vpc" "ecs_network" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }
 
 # Add Security Group + Rules to the VPC
@@ -14,9 +15,10 @@ resource "aws_security_group" "ecs_fargate_sg" {
   description = "Allow unrestricted outbound egress"
   vpc_id      = aws_vpc.ecs_network.id
 
-  tags = {
-    "origin" : "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }
 
 resource "aws_security_group_rule" "egress" {
@@ -33,9 +35,10 @@ resource "aws_security_group_rule" "egress" {
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = aws_vpc.ecs_network.id
 
-  tags = {
-    origin = "dragondrop-compute-module"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
 }
 
 resource "aws_route_table" "public_subnets_route_table" {
@@ -46,10 +49,10 @@ resource "aws_route_table" "public_subnets_route_table" {
     gateway_id = aws_internet_gateway.internet_gateway.id
   }
 
-  tags = {
-    origin = "dragondrop-compute-module"
-    name   = "ecs fargate routes table"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module", name = "ecs fargate routes table" },
+    var.tags,
+  )
 }
 
 # Creating a Public Subnet with access to the internet
@@ -58,10 +61,10 @@ resource "aws_subnet" "public_subnet" {
   cidr_block              = "10.0.0.0/24"
   map_public_ip_on_launch = true
 
-  tags = {
-    origin = "dragondrop-compute-module"
-    name   = "ecs fargate subnet"
-  }
+  tags = merge(
+    { origin = "dragondrop-compute-module", name = "ecs fargate routes table" },
+    var.tags,
+  )
 }
 
 resource "aws_route_table_association" "link_public_access_route_table" {
