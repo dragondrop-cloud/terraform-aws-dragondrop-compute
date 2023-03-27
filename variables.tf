@@ -1,4 +1,4 @@
-# Variables with default values
+# Variables with default values that most users should not need/want to tweak.
 variable "dragondrop_api" {
   description = "URL for the dragondrop API, used for controlling allowed origins on the Lambda URL."
   type        = string
@@ -23,10 +23,21 @@ variable "lambda_s3_bucket_name" {
   default     = "dragondrop-ecs-fargate-task-lambda-trigger-prod"
 }
 
+variable "task_cpu_count" {
+  description = "Number of vCPU units that the drift mitigation task should run on."
+  type        = number
+  default = 4096
+}
+
+variable "task_memory" {
+  description = "Amount of compute memory that the drift mitigation task should run on."
+  type        = number
+  default    = 8192
+}
 
 # Required variables for module
-variable "https_trigger_containerized_lambda_name" {
-  description = "Name of the https trigger containerized lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."
+variable "https_trigger_lambda_name" {
+  description = "Name of the https trigger lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."
   type        = string
 }
 
@@ -44,14 +55,4 @@ variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
   default     = {}
-}
-
-variable "task_cpu_count" {
-  description = "Number of vCPU units that the drift mitigation task should run on."
-  type        = number
-}
-
-variable "task_memory" {
-  description = "Amount of compute memory that the drift mitigation task should run on."
-  type        = number
 }

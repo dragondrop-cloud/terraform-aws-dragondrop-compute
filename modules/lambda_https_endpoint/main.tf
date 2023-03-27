@@ -31,7 +31,7 @@ resource "aws_iam_role" "dragondrop_lambda_https_trigger" {
 
 # Creating the actual lambda function and the corresponding HTTPS endpoint.
 resource "aws_lambda_function" "request_handler" {
-  function_name = var.https_trigger_containerized_lambda_name
+  function_name = var.https_trigger_lambda_name
   description   = "Lambda that handles inbound HTTP trigger"
 
   role         = aws_iam_role.dragondrop_lambda_https_trigger.arn

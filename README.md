@@ -4,6 +4,19 @@ Terraform module for deploying the compute services needed to run dragondrop.clo
 # dragondrop Self-Hosting Compute
 Terraform code for deploying the compute resources needed to run dragondrop.cloud within your AWS environment.
 
+![AWS infrastructure diagram](./images/2023-03-05%20AWS%20Infrastructure%20Module.png)
+Cloud architecture diagram of the infrastructure created by this module.
+
+## Variables
+
+| Name                            | Type        | Purpose                                                                                                                                           |
+|---------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| _**https_trigger_lambda_name**_ | string      | Name of the lambda function created by the Module which services as an HTTPS endpoint.                                                            |
+| **_region_**                    | string      | AWS region into which resources should be deployed.                                                                                               |
+| **_service_account_name_**      | string      | Name of the service account with exclusively ECS Task invocation privileges that serves as the service account for compute created by the module. |
+| **_tags_**                      | map(string) | An optional mapping of tags to add to resources created by the module.                                                                            |
+
+
 ## How to Use this Module
 This module defines the compute resources needed to run dragondrop within your own cloud environment.
 
