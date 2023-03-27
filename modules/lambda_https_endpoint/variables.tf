@@ -52,3 +52,9 @@ variable "subnet_id" {
   description = "Subnet within which the ECS Fargate Task is placed."
   type        = string
 }
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default     = {}
+}
