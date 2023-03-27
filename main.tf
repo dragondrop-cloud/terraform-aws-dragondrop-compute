@@ -1,4 +1,3 @@
-# TODO: Define baseline tags variable for deployment, and pass to each module
 module "vpc_subnet_with_internet_access" {
   source = "./modules/vpc_subnet_with_internet_access"
 
