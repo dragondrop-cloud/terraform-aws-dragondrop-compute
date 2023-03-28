@@ -1,6 +1,8 @@
 # terraform-aws-dragondrop-compute
 Terraform module for deploying the compute services needed to run dragondrop.cloud within your AWS cloud environment.
 
+Available for consumption via HashiCorp's Public Module Registry: https://registry.terraform.io/modules/dragondrop-cloud/dragondrop-compute/aws/latest
+
 # dragondrop Self-Hosting Compute
 Terraform code for deploying the compute resources needed to run dragondrop.cloud within your AWS environment.
 
