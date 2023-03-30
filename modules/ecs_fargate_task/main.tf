@@ -47,7 +47,7 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
     memory    = var.task_memory
     essential = true
 
-    environment = [
+    secrets = [
       {
         name      = "DRAGONDROP_DIVISONTOPROVIDER"
         valueFrom = module.ecs_fargate_iam_secrets.division_to_provider_secret_arn
