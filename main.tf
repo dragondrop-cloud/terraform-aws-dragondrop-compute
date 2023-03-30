@@ -24,7 +24,7 @@ module "lambda_https_endpoint" {
   ecs_cluster_arn                           = module.ecs_fargate_task.ecs_cluster_arn
   ecs_fargate_task_container_name           = var.ecs_fargate_task_container_name
   ecs_task_arn                              = module.ecs_fargate_task.ecs_task_arn
-  https_trigger_lambda_name   = var.https_trigger_lambda_name
+  https_trigger_lambda_name                 = var.https_trigger_lambda_name
   iam_policy_ecs_fargate_task_pass_role_arn = module.ecs_fargate_task.policy_pass_role_ecs_fargate_task_arn
   iam_policy_log_creator_arn                = module.ecs_fargate_task.log_creator_policy_arn
   lambda_role_assume_policy_json            = module.ecs_fargate_task.lambda_role_assume_policy_json

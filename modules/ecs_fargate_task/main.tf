@@ -51,6 +51,26 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
       {
         name      = "DRAGONDROP_DIVISONTOPROVIDER"
         valueFrom = module.ecs_fargate_iam_secrets.division_to_provider_secret_arn
+      },
+      {
+        name      = "DRAGONDROP_DIVISIONCLOUDCREDENTIALS"
+        valueFrom = module.ecs_fargate_iam_secrets.division_cloud_credentials_secret_arn
+      },
+      {
+        name      = "DRAGONDROP_WORKSPACETODIRECTORY"
+        valueFrom = module.ecs_fargate_iam_secrets.workspace_to_directory_secret
+      },
+      {
+        name      = "DRAGONDROP_VCSTOKEN"
+        valueFrom = module.ecs_fargate_iam_secrets.vcs_token_secret
+      },
+      {
+        name      = "DRAGONDROP_TERRAFORMCLOUDTOKEN"
+        valueFrom = module.ecs_fargate_iam_secrets.terraform_cloud_token_secret
+      },
+      {
+        name      = "DRAGONDROP_JOBTOKEN"
+        valueFrom = module.ecs_fargate_iam_secrets.job_token_secret
       }
     ],
 

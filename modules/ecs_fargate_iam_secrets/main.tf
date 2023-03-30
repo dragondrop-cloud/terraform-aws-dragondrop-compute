@@ -10,69 +10,15 @@ module "division_cloud_credentials_secret" {
   tags   = var.tags
 }
 
-module "providers_secret" {
-  source = "../secret"
-  name   = "providers_secret"
-  tags   = var.tags
-}
-
-module "terraform_version_secret" {
-  source = "../secret"
-  name   = "terraform_version"
-  tags   = var.tags
-}
-
 module "workspace_to_directory_secret" {
   source = "../secret"
   name   = "workspace_to_directory"
   tags   = var.tags
 }
 
-module "migration_history_storage_secret" {
-  source = "../secret"
-  name   = "migration_history_storage"
-  tags   = var.tags
-}
-
 module "vcs_token_secret" {
   source = "../secret"
   name   = "vcs_token"
-  tags   = var.tags
-}
-
-module "vcs_user_secret" {
-  source = "../secret"
-  name   = "vcs_user"
-  tags   = var.tags
-}
-
-module "vcs_repo_secret" {
-  source = "../secret"
-  name   = "vcs_repo"
-  tags   = var.tags
-}
-
-module "vcs_system_secret" {
-  source = "../secret"
-  name   = "vcs_system"
-  tags   = var.tags
-}
-
-module "vcs_base_branch_secret" {
-  source = "../secret"
-  name   = "vcs_base_branch"
-  tags   = var.tags
-}
-
-module "state_backend_secret" {
-  source = "../secret"
-  name   = "state_backend"
-  tags   = var.tags
-}
-
-module "terraform_cloud_organization_secret" {
-  source = "../secret"
-  name   = "terraform_cloud_organization"
   tags   = var.tags
 }
 
