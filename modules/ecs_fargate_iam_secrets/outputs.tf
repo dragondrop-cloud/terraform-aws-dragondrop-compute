@@ -27,18 +27,18 @@ output "division_cloud_credentials_secret_arn" {
   value = module.division_cloud_credentials_secret.arn
 }
 
-output "workspace_to_directory_secret" {
+output "workspace_to_directory_secret_arn" {
   value = module.workspace_to_directory_secret.arn
 }
 
-output "vcs_token_secret" {
+output "vcs_token_secret_arn" {
   value = module.vcs_token_secret.arn
 }
 
-output "terraform_cloud_token_secret" {
+output "terraform_cloud_token_secret_arn" {
   value = module.terraform_cloud_token_secret.arn
 }
 
-output "job_token_secret" {
+output "job_token_secret_arn" {
   value = module.job_token_secret.arn
 }
