@@ -49,7 +49,7 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
 
     secrets = [
       {
-        name      = "DRAGONDROP_DIVISONTOPROVIDER"
+        name      = "DRAGONDROP_DIVISIONTOPROVIDER"
         valueFrom = module.ecs_fargate_iam_secrets.division_to_provider_secret_arn
       },
       {
