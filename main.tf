@@ -7,6 +7,7 @@ module "vpc_subnet_with_internet_access" {
 module "ecs_fargate_task" {
   source = "./modules/ecs_fargate_task"
 
+  dragondrop_api_path              = var.dragondrop_api
   ecs_fargate_task_container_name  = var.ecs_fargate_task_container_name
   region                           = var.region
   dragondrop_engine_container_path = var.dragondrop_engine_container_path

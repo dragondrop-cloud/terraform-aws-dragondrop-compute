@@ -17,6 +17,7 @@ data "aws_iam_policy_document" "secret_reader" {
     ]
     effect = "Allow"
     resources = [
+      module.api_path_secret.arn,
       module.division_to_provider_secret.arn,
       module.division_cloud_credentials_secret.arn,
       module.workspace_to_directory_secret.arn,
@@ -27,6 +28,7 @@ data "aws_iam_policy_document" "secret_reader" {
   }
 
   depends_on = [
+    module.api_path_secret,
     module.division_to_provider_secret,
     module.division_cloud_credentials_secret,
     module.workspace_to_directory_secret,

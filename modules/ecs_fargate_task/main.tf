@@ -2,6 +2,7 @@
 module "ecs_fargate_iam_secrets" {
   source = "../ecs_fargate_iam_secrets"
 
+  dragondrop_api_path_name  = var.dragondrop_api_path
   log_creator_policy_name   = "log_creator"
   secret_reader_policy_name = "secret_reader"
   tags                      = var.tags
@@ -48,6 +49,10 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
     essential = true
 
     secrets = [
+      {
+        name      = "DRAGONDROP_APIPATH"
+        valueFrom = module.ecs_fargate_iam_secrets.api_path_secret_arn
+      },
       {
         name      = "DRAGONDROP_DIVISIONTOPROVIDER"
         valueFrom = module.ecs_fargate_iam_secrets.division_to_provider_secret_arn
