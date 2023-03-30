@@ -1,3 +1,10 @@
+module "api_path_secret" {
+  source               = "../secret"
+  name                 = "api_path"
+  tags                 = var.tags
+  default_secret_value = var.dragondrop_api_path_name
+}
+
 module "division_to_provider_secret" {
   source = "../secret"
   name   = "division_to_provider"

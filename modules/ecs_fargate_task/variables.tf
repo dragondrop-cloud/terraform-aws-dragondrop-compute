@@ -1,3 +1,8 @@
+variable "dragondrop_api_path" {
+  description = "dragondrop API path."
+  type        = string
+}
+
 variable "dragondrop_engine_container_path" {
   description = "Path to the dragondrop engine container used in the cloud run job."
   type        = string

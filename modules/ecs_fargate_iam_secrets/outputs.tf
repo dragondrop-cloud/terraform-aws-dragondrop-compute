@@ -19,6 +19,10 @@ output "policy_log_creator_arn" {
 }
 
 # Secrets ARN Output
+output "api_path_secret_arn" {
+  value = module.api_path_secret.arn
+}
+
 output "division_to_provider_secret_arn" {
   value = module.division_to_provider_secret.arn
 }

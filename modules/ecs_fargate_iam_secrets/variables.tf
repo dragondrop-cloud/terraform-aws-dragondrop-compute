@@ -1,3 +1,8 @@
+variable "dragondrop_api_path_name" {
+  description = "dragondrop API path."
+  type        = string
+}
+
 variable "log_creator_policy_name" {
   description = "Name of the log creator policy to create. Will be prefixed by 'dragondrop'."
   type        = string
