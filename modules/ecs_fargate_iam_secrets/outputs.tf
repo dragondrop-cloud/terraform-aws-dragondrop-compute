@@ -22,3 +22,23 @@ output "policy_log_creator_arn" {
 output "division_to_provider_secret_arn" {
   value = module.division_to_provider_secret.arn
 }
+
+output "division_cloud_credentials_secret_arn" {
+  value = module.division_cloud_credentials_secret.arn
+}
+
+output "workspace_to_directory_secret_arn" {
+  value = module.workspace_to_directory_secret.arn
+}
+
+output "vcs_token_secret_arn" {
+  value = module.vcs_token_secret.arn
+}
+
+output "terraform_cloud_token_secret_arn" {
+  value = module.terraform_cloud_token_secret.arn
+}
+
+output "job_token_secret_arn" {
+  value = module.job_token_secret.arn
+}

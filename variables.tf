@@ -26,13 +26,13 @@ variable "lambda_s3_bucket_name" {
 variable "task_cpu_count" {
   description = "Number of vCPU units that the drift mitigation task should run on."
   type        = number
-  default = 4096
+  default     = 4096
 }
 
 variable "task_memory" {
   description = "Amount of compute memory that the drift mitigation task should run on."
   type        = number
-  default    = 8192
+  default     = 8192
 }
 
 # Required variables for module
