@@ -41,6 +41,12 @@ module "job_token_secret" {
   tags   = var.tags
 }
 
+module "infracost_api_token_secret" {
+  source = "../secret"
+  name   = "infracost_api_token"
+  tags   = var.tags
+}
+
 resource "aws_iam_policy" "log_creator" {
   name   = "dragondrop-${var.log_creator_policy_name}"
   path   = "/"
