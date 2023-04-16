@@ -76,6 +76,10 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
       {
         name      = "DRAGONDROP_JOBTOKEN"
         valueFrom = module.ecs_fargate_iam_secrets.job_token_secret_arn
+      },
+      {
+        name      = "DRAGONDROP_INFRACOSTAPITOKEN"
+        valueFrom = module.ecs_fargate_iam_secrets.infracost_api_token_secret_arn
       }
     ],
 
