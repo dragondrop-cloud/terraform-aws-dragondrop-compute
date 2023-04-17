@@ -24,6 +24,7 @@ data "aws_iam_policy_document" "secret_reader" {
       module.vcs_token_secret.arn,
       module.terraform_cloud_token_secret.arn,
       module.job_token_secret.arn,
+      module.infracost_api_token_secret.arn,
     ]
   }
 
@@ -34,7 +35,8 @@ data "aws_iam_policy_document" "secret_reader" {
     module.workspace_to_directory_secret,
     module.vcs_token_secret,
     module.terraform_cloud_token_secret,
-    module.job_token_secret
+    module.job_token_secret,
+    module.infracost_api_token_secret,
   ]
 }
 
