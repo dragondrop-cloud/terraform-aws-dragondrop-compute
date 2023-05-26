@@ -33,11 +33,11 @@ to secrets within AWS Parameter Store, and can be customized like any other secr
 
 ### Security When Using This Module
 This module creates a new IAM role, "dragondrop HTTPS Trigger Role" which has the minimum permissions needed to evoke
-the created Fargate Task. This role is assigned to a new service account, and that service account is the service account used by both the
-Containerized Lambda and Fargate Task provisioned by this module.
+the created Fargate Task. This role is assigned to a new service account, and that service account is the service account
+used by the Lambda function provisioned by this module.
 
-Lastly, that service account is granted Secret Accessor privileges on only the secrets referenced by the Fargate task as
-environment variables.
+Lastly, another service account is granted Secret Accessor privileges on only the secrets referenced by the Fargate task as
+environment variables, and used by the Fargate task to run the dragondrop engine.
 
 ## What is dragondrop.cloud?
 [dragondrop.cloud](https://dragondrop.cloud) is a provider of IAC automation solutions that are self-hosted
