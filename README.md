@@ -22,10 +22,10 @@ Cloud architecture diagram of the infrastructure created by this module.
 ## How to Use this Module
 This module defines the compute resources needed to run dragondrop within your own cloud environment.
 
-It defines a [Container-based Lambda Function](https://github.com/dragondrop-cloud/ecs-fargate-http-trigger) that can
+It defines a [Lambda Function](https://github.com/dragondrop-cloud/ecs-fargate-http-trigger) that can
 evoke the longer running dragondrop engine living in a provisioned ECS Fargate Task.
 
-The url for this Cloud Run Service is output and should be passed to a dragondrop [Job](https://docs.dragondrop.cloud/product-docs/getting-started/creating-a-job)
+The url for this lambda function is output and should be passed to a dragondrop [Job](https://docs.dragondrop.cloud/product-docs/getting-started/creating-a-job)
 definition as that Job's "HTTPS Url".
 
 The ECS Fargate Task hosts dragondrop's proprietary container. All environment variables that need to be configured are references
