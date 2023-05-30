@@ -5,21 +5,9 @@ module "api_path_secret" {
   default_secret_value = var.dragondrop_api_path_name
 }
 
-module "division_to_provider_secret" {
-  source = "../secret"
-  name   = "division_to_provider"
-  tags   = var.tags
-}
-
 module "division_cloud_credentials_secret" {
   source = "../secret"
   name   = "division_cloud_credentials"
-  tags   = var.tags
-}
-
-module "workspace_to_directory_secret" {
-  source = "../secret"
-  name   = "workspace_to_directory"
   tags   = var.tags
 }
 
