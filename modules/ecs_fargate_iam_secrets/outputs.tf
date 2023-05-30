@@ -23,16 +23,8 @@ output "api_path_secret_arn" {
   value = module.api_path_secret.arn
 }
 
-output "division_to_provider_secret_arn" {
-  value = module.division_to_provider_secret.arn
-}
-
 output "division_cloud_credentials_secret_arn" {
   value = module.division_cloud_credentials_secret.arn
-}
-
-output "workspace_to_directory_secret_arn" {
-  value = module.workspace_to_directory_secret.arn
 }
 
 output "vcs_token_secret_arn" {
