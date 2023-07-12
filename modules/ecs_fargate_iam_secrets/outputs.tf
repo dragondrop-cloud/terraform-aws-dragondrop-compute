@@ -35,8 +35,8 @@ output "terraform_cloud_token_secret_arn" {
   value = module.terraform_cloud_token_secret.arn
 }
 
-output "job_token_secret_arn" {
-  value = module.job_token_secret.arn
+output "org_token_secret_arn" {
+  value = module.org_token_secret.arn
 }
 
 output "infracost_api_token_secret_arn" {

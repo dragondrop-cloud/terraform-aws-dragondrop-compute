@@ -23,9 +23,9 @@ module "terraform_cloud_token_secret" {
   tags   = var.tags
 }
 
-module "job_token_secret" {
+module "org_token_secret" {
   source = "../secret"
-  name   = "job_token"
+  name   = "org_token"
   tags   = var.tags
 }
 
