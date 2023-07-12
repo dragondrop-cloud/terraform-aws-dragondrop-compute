@@ -5,16 +5,16 @@ variable "dragondrop_api" {
   default     = "https://api.dragondrop.cloud"
 }
 
-variable "dragondrop_engine_container_path" {
-  description = "Path to the dragondrop engine container used in the ECS Fargate job."
+variable "cloud_concierge_container_path" {
+  description = "Path to the cloud_concierge container used in the ECS Fargate job."
   type        = string
-  default     = "us-east4-docker.pkg.dev/dragondrop-prod/dragondrop-engine/engine:latest"
+  default     = "docker.io/dragondropcloud/cloud-concierge:latest"
 }
 
 variable "ecs_fargate_task_container_name" {
   description = "Name of the ecs fargate task container."
   type        = string
-  default     = "dragondrop-drift-mitigation-engine"
+  default     = "cloud-concierge-engine"
 }
 
 variable "lambda_s3_bucket_name" {

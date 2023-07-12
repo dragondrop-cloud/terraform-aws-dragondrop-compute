@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "secret" {
-  name = "dragondrop_${var.name}"
+  name = "cloud_concierge_${var.name}"
   tags = merge(
     { origin = "dragondrop-compute-module" },
     var.tags,

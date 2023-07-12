@@ -43,34 +43,34 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
   // Bind mount host volumes only
   container_definitions = jsonencode([{
     name      = var.ecs_fargate_task_container_name
-    image     = var.dragondrop_engine_container_path
+    image     = var.cloud_concierge_container_path
     cpu       = var.task_cpu_count
     memory    = var.task_memory
     essential = true
 
     secrets = [
       {
-        name      = "DRAGONDROP_APIPATH"
+        name      = "CLOUDCONCIERGE_APIPATH"
         valueFrom = module.ecs_fargate_iam_secrets.api_path_secret_arn
       },
       {
-        name      = "DRAGONDROP_DIVISIONCLOUDCREDENTIALS"
+        name      = "CLOUDCONCIERGE_DIVISIONCLOUDCREDENTIALS"
         valueFrom = module.ecs_fargate_iam_secrets.division_cloud_credentials_secret_arn
       },
       {
-        name      = "DRAGONDROP_VCSTOKEN"
+        name      = "CLOUDCONCIERGE_VCSTOKEN"
         valueFrom = module.ecs_fargate_iam_secrets.vcs_token_secret_arn
       },
       {
-        name      = "DRAGONDROP_TERRAFORMCLOUDTOKEN"
+        name      = "CLOUDCONCIERGE_TERRAFORMCLOUDTOKEN"
         valueFrom = module.ecs_fargate_iam_secrets.terraform_cloud_token_secret_arn
       },
       {
-        name      = "DRAGONDROP_JOBTOKEN"
-        valueFrom = module.ecs_fargate_iam_secrets.job_token_secret_arn
+        name      = "CLOUDCONCIERGE_ORGTOKEN"
+        valueFrom = module.ecs_fargate_iam_secrets.org_token_secret_arn
       },
       {
-        name      = "DRAGONDROP_INFRACOSTAPITOKEN"
+        name      = "CLOUDCONCIERGE_INFRACOSTAPITOKEN"
         valueFrom = module.ecs_fargate_iam_secrets.infracost_api_token_secret_arn
       }
     ],
