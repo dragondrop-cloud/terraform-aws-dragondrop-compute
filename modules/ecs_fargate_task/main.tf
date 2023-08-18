@@ -4,6 +4,7 @@ module "ecs_fargate_iam_secrets" {
 
   dragondrop_api_path_name  = var.dragondrop_api_path
   log_creator_policy_name   = "log_creator"
+  s3_state_bucket_name      = var.s3_state_bucket_name
   secret_reader_policy_name = "secret_reader"
   tags                      = var.tags
 }

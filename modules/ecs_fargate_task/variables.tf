@@ -18,6 +18,11 @@ variable "region" {
   type        = string
 }
 
+variable "s3_state_bucket_name" {
+  description = "Optional name of the S3 bucket used for storing Terraform state. The ECS Fargate task created by the module will have read access to this bucket."
+  type        = string
+}
+
 variable "tags" {
   description = "A map of tags to add to all resources"
   type        = map(string)
