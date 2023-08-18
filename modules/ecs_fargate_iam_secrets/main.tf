@@ -5,12 +5,6 @@ module "api_path_secret" {
   default_secret_value = var.dragondrop_api_path_name
 }
 
-module "division_cloud_credentials_secret" {
-  source = "../secret"
-  name   = "division_cloud_credentials"
-  tags   = var.tags
-}
-
 module "vcs_token_secret" {
   source = "../secret"
   name   = "vcs_token"
@@ -20,18 +14,6 @@ module "vcs_token_secret" {
 module "terraform_cloud_token_secret" {
   source = "../secret"
   name   = "terraform_cloud_token"
-  tags   = var.tags
-}
-
-module "org_token_secret" {
-  source = "../secret"
-  name   = "org_token"
-  tags   = var.tags
-}
-
-module "infracost_api_token_secret" {
-  source = "../secret"
-  name   = "infracost_api_token"
   tags   = var.tags
 }
 
@@ -59,12 +41,26 @@ resource "aws_iam_policy" "dragondrop_secret_reader" {
   depends_on = [data.aws_iam_policy_document.secret_reader]
 }
 
+resource "aws_iam_policy" "s3_state_bucket_reader" {
+  name   = "dragondrop-s3-bucket-reade"
+  path   = "/"
+  policy = data.aws_iam_policy_document.s3_state_bucket_reader.json
+
+  tags = merge(
+    { origin = "dragondrop-compute-module" },
+    var.tags,
+  )
+
+  depends_on = [data.aws_iam_policy_document.s3_state_bucket_reader]
+}
+
 resource "aws_iam_role" "dragondrop_fargate_runner" {
   assume_role_policy    = data.aws_iam_policy_document.ecs_task_assume_role_policy.json
   description           = "Role assumed by the AWS Fargate Container."
   force_detach_policies = false
   name                  = "dragondrop-fargate-runner"
-  managed_policy_arns   = [aws_iam_policy.log_creator.arn, aws_iam_policy.dragondrop_secret_reader.arn]
+  # If an s3 state backend bucket was specified, add the corresponding policy document, if not, leave it off.
+  managed_policy_arns = var.s3_state_bucket_name == "NONE" ? [aws_iam_policy.log_creator.arn, aws_iam_policy.dragondrop_secret_reader.arn, "arn:aws:iam::aws:policy/ReadOnlyAccess"] : [aws_iam_policy.log_creator.arn, aws_iam_policy.dragondrop_secret_reader.arn, aws_iam_policy.s3_state_bucket_reader.arn, "arn:aws:iam::aws:policy/ReadOnlyAccess"]
 
   tags = merge(
     { origin = "dragondrop-compute-module" },

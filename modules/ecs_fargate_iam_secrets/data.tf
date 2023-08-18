@@ -18,22 +18,28 @@ data "aws_iam_policy_document" "secret_reader" {
     effect = "Allow"
     resources = [
       module.api_path_secret.arn,
-      module.division_cloud_credentials_secret.arn,
       module.vcs_token_secret.arn,
       module.terraform_cloud_token_secret.arn,
-      module.org_token_secret.arn,
-      module.infracost_api_token_secret.arn,
     ]
   }
 
   depends_on = [
     module.api_path_secret,
-    module.division_cloud_credentials_secret,
     module.vcs_token_secret,
     module.terraform_cloud_token_secret,
-    module.org_token_secret,
-    module.infracost_api_token_secret,
   ]
+}
+
+data "aws_iam_policy_document" "s3_state_bucket_reader" {
+  statement {
+    actions = [
+      "s3:GetObject",
+      "s3:GetObjectAcl",
+      "s3:ListBucket",
+    ]
+    effect    = "Allow"
+    resources = ["arn:aws:s3:::${var.s3_state_bucket_name}/*"]
+  }
 }
 
 data "aws_iam_policy_document" "ecs_task_assume_role_policy" {

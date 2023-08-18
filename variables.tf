@@ -35,6 +35,12 @@ variable "task_memory" {
   default     = 8192
 }
 
+variable "s3_state_bucket_name" {
+  description = "Optional name of the S3 bucket used for storing Terraform state. The ECS Fargate task created by the module will have read access to this bucket."
+  type        = string
+  default     = "NONE"
+}
+
 # Required variables for module
 variable "https_trigger_lambda_name" {
   description = "Name of the https trigger lambda that will trigger the dragondrop 'engine' hosted in an ECS Fargate task."

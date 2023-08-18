@@ -54,10 +54,6 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
         valueFrom = module.ecs_fargate_iam_secrets.api_path_secret_arn
       },
       {
-        name      = "CLOUDCONCIERGE_DIVISIONCLOUDCREDENTIALS"
-        valueFrom = module.ecs_fargate_iam_secrets.division_cloud_credentials_secret_arn
-      },
-      {
         name      = "CLOUDCONCIERGE_VCSTOKEN"
         valueFrom = module.ecs_fargate_iam_secrets.vcs_token_secret_arn
       },
@@ -65,14 +61,6 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
         name      = "CLOUDCONCIERGE_TERRAFORMCLOUDTOKEN"
         valueFrom = module.ecs_fargate_iam_secrets.terraform_cloud_token_secret_arn
       },
-      {
-        name      = "CLOUDCONCIERGE_ORGTOKEN"
-        valueFrom = module.ecs_fargate_iam_secrets.org_token_secret_arn
-      },
-      {
-        name      = "CLOUDCONCIERGE_INFRACOSTAPITOKEN"
-        valueFrom = module.ecs_fargate_iam_secrets.infracost_api_token_secret_arn
-      }
     ],
 
     logConfiguration = {
