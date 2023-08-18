@@ -10,6 +10,7 @@ module "ecs_fargate_task" {
   dragondrop_api_path             = var.dragondrop_api
   ecs_fargate_task_container_name = var.ecs_fargate_task_container_name
   region                          = var.region
+  s3_state_bucket_name            = var.s3_state_bucket_name
   cloud_concierge_container_path  = var.cloud_concierge_container_path
   tags                            = var.tags
   task_cpu_count                  = var.task_cpu_count
