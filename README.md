@@ -11,13 +11,13 @@ Cloud architecture diagram of the infrastructure created by this module.
 
 ## Variables
 
-| Name                            | Type        | Purpose                                                                                                                                           |
-|---------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| _**https_trigger_lambda_name**_ | string      | Name of the lambda function created by the Module which services as an HTTPS endpoint.                                                            |
-| **_region_**                    | string      | AWS region into which resources should be deployed.                                                                                               |
-| **_service_account_name_**      | string      | Name of the service account with exclusively ECS Task invocation privileges that serves as the service account for compute created by the module. |
-| **_tags_**                      | map(string) | An optional mapping of tags to add to resources created by the module.                                                                            |
-
+| Name                           | Type        | Purpose                                                                                                                                           |
+|--------------------------------|-------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **s3_state_bucket_name**_      | string      | Optional name of the S3 bucket used for storing Terraform state. The ECS Fargate task created by the module will have read access to this bucket. |
+| **https_trigger_lambda_name**_ | string      | Name of the lambda function created by the Module which services as an HTTPS endpoint.                                                            |
+| **_region_**                   | string      | AWS region into which resources should be deployed.                                                                                               |
+| **_service_account_name_**     | string      | Name of the service account with exclusively ECS Task invocation privileges that serves as the service account for compute created by the module. |
+| **_tags_**                     | map(string) | An optional mapping of tags to add to resources created by the module.                                                                            |
 
 ## How to Use this Module
 This module defines the compute resources needed to run dragondrop within your own cloud environment.
@@ -32,12 +32,13 @@ The ECS Fargate Task hosts dragondrop's proprietary container. All environment v
 to secrets within AWS Parameter Store, and can be customized like any other secret.
 
 ### Security When Using This Module
-This module creates a new IAM role, "dragondrop HTTPS Trigger Role" which has the minimum permissions needed to evoke
-the created Fargate Task. This role is assigned to a new service account, and that service account is the service account
-used by the Lambda function provisioned by this module.
+This module creates two new roles with minimized IAM permissions:
+1) "dragondrop-lambda-https-trigger" which has the minimum permissions needed to evoke the created Fargate Task.
+The Lambda function created by this module is granted [this role](./modules/lambda_https_endpoint/data.tf).
 
-Lastly, another service account is granted Secret Accessor privileges on only the secrets referenced by the Fargate task as
-environment variables, and used by the Fargate task to run the dragondrop engine.
+2) "dragondrop-fargate-runner", an IAM role with Secret Accessor privileges on only the secrets referenced by the Fargate task as
+environment variables. Also has read-only access to then entire AWS account, and optional read-access to the s3 bucket containing 
+Terraform state files. The ECS Fargate task created by this module is granted [this role](./modules/lambda_https_endpoint/).
 
 ## What is dragondrop.cloud?
 [dragondrop.cloud](https://dragondrop.cloud) is a provider of IAC automation solutions that are self-hosted
