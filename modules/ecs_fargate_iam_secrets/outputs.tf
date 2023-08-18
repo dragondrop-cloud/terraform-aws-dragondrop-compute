@@ -23,22 +23,10 @@ output "api_path_secret_arn" {
   value = module.api_path_secret.arn
 }
 
-output "division_cloud_credentials_secret_arn" {
-  value = module.division_cloud_credentials_secret.arn
-}
-
 output "vcs_token_secret_arn" {
   value = module.vcs_token_secret.arn
 }
 
 output "terraform_cloud_token_secret_arn" {
   value = module.terraform_cloud_token_secret.arn
-}
-
-output "org_token_secret_arn" {
-  value = module.org_token_secret.arn
-}
-
-output "infracost_api_token_secret_arn" {
-  value = module.infracost_api_token_secret.arn
 }
