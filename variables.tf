@@ -5,6 +5,12 @@ variable "dragondrop_api" {
   default     = "https://api.dragondrop.cloud"
 }
 
+variable "nlp_engine_api" {
+  description = "URL for the NLP engine API, used for getting a recommended mapping between new resource and state file."
+  type        = string
+  default     = "https://us-east4-dragondrop-prod.cloudfunctions.net/nlpengine-endpoint-prod"
+}
+
 variable "cloud_concierge_container_path" {
   description = "Path to the cloud_concierge container used in the ECS Fargate job."
   type        = string

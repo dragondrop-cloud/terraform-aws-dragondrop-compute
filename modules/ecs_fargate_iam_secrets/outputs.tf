@@ -23,6 +23,10 @@ output "api_path_secret_arn" {
   value = module.api_path_secret.arn
 }
 
+output "nlp_engine_secret_arn" {
+  value = module.nlp_engine_secret.arn
+}
+
 output "vcs_token_secret_arn" {
   value = module.vcs_token_secret.arn
 }

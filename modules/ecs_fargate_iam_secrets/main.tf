@@ -5,6 +5,13 @@ module "api_path_secret" {
   default_secret_value = var.dragondrop_api_path_name
 }
 
+module "nlp_engine_secret" {
+  source               = "../secret"
+  name                 = "nlp_engine_api"
+  tags                 = var.tags
+  default_secret_value = var.nlp_engine_api
+}
+
 module "vcs_token_secret" {
   source = "../secret"
   name   = "vcs_token"
@@ -42,7 +49,7 @@ resource "aws_iam_policy" "dragondrop_secret_reader" {
 }
 
 resource "aws_iam_policy" "s3_state_bucket_reader" {
-  name   = "dragondrop-s3-bucket-reade"
+  name   = "dragondrop-s3-bucket-reader"
   path   = "/"
   policy = data.aws_iam_policy_document.s3_state_bucket_reader.json
 

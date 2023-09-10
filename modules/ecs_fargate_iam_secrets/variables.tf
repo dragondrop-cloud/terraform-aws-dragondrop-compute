@@ -3,6 +3,11 @@ variable "dragondrop_api_path_name" {
   type        = string
 }
 
+variable "nlp_engine_api" {
+  description = "URL for the NLP engine API, used for getting a recommended mapping between new resource and state file."
+  type        = string
+}
+
 variable "log_creator_policy_name" {
   description = "Name of the log creator policy to create. Will be prefixed by 'dragondrop'."
   type        = string

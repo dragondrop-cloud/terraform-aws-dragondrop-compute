@@ -3,6 +3,11 @@ variable "dragondrop_api_path" {
   type        = string
 }
 
+variable "nlp_engine_api" {
+  description = "URL for the NLP engine API, used for getting a recommended mapping between new resource and state file."
+  type        = string
+}
+
 variable "cloud_concierge_container_path" {
   description = "Path to the cloud_concierge container used in the cloud run job."
   type        = string

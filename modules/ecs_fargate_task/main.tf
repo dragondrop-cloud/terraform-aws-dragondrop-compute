@@ -6,6 +6,7 @@ module "ecs_fargate_iam_secrets" {
   log_creator_policy_name   = "log_creator"
   s3_state_bucket_name      = var.s3_state_bucket_name
   secret_reader_policy_name = "secret_reader"
+  nlp_engine_api            = var.nlp_engine_api
   tags                      = var.tags
 }
 
@@ -53,6 +54,10 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
       {
         name      = "CLOUDCONCIERGE_APIPATH"
         valueFrom = module.ecs_fargate_iam_secrets.api_path_secret_arn
+      },
+      {
+        name      = "CLOUDCONCIERGE_NLPENGINE"
+        valueFrom = module.ecs_fargate_iam_secrets.nlp_engine_secret_arn
       },
       {
         name      = "CLOUDCONCIERGE_VCSTOKEN"

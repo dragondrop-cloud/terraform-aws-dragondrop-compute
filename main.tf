@@ -8,6 +8,7 @@ module "ecs_fargate_task" {
   source = "./modules/ecs_fargate_task"
 
   dragondrop_api_path             = var.dragondrop_api
+  nlp_engine_api                  = var.nlp_engine_api
   ecs_fargate_task_container_name = var.ecs_fargate_task_container_name
   region                          = var.region
   s3_state_bucket_name            = var.s3_state_bucket_name
