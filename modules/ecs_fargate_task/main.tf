@@ -56,7 +56,7 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
         valueFrom = module.ecs_fargate_iam_secrets.api_path_secret_arn
       },
       {
-        name      = "CLOUDCONCIERGE_NLPENGINE"
+        name      = "CLOUDCONCIERGE_NLPENDPOINT"
         valueFrom = module.ecs_fargate_iam_secrets.nlp_engine_secret_arn
       },
       {
