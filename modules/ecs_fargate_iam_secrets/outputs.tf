@@ -27,10 +27,6 @@ output "nlp_engine_secret_arn" {
   value = module.nlp_engine_secret.arn
 }
 
-output "vcs_token_secret_arn" {
-  value = module.vcs_token_secret.arn
-}
-
 output "terraform_cloud_token_secret_arn" {
   value = module.terraform_cloud_token_secret.arn
 }

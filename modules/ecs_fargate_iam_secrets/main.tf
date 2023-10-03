@@ -12,12 +12,6 @@ module "nlp_engine_secret" {
   default_secret_value = var.nlp_engine_api
 }
 
-module "vcs_token_secret" {
-  source = "../secret"
-  name   = "vcs_token"
-  tags   = var.tags
-}
-
 module "terraform_cloud_token_secret" {
   source = "../secret"
   name   = "terraform_cloud_token"

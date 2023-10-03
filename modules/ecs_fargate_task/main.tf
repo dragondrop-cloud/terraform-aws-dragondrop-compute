@@ -60,10 +60,6 @@ resource "aws_ecs_task_definition" "dragondrop_drift_task" {
         valueFrom = module.ecs_fargate_iam_secrets.nlp_engine_secret_arn
       },
       {
-        name      = "CLOUDCONCIERGE_VCSTOKEN"
-        valueFrom = module.ecs_fargate_iam_secrets.vcs_token_secret_arn
-      },
-      {
         name      = "CLOUDCONCIERGE_TERRAFORMCLOUDTOKEN"
         valueFrom = module.ecs_fargate_iam_secrets.terraform_cloud_token_secret_arn
       },

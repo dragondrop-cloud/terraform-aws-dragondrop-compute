@@ -19,7 +19,6 @@ data "aws_iam_policy_document" "secret_reader" {
     resources = [
       module.api_path_secret.arn,
       module.nlp_engine_secret.arn,
-      module.vcs_token_secret.arn,
       module.terraform_cloud_token_secret.arn,
     ]
   }
@@ -27,7 +26,6 @@ data "aws_iam_policy_document" "secret_reader" {
   depends_on = [
     module.api_path_secret,
     module.nlp_engine_secret,
-    module.vcs_token_secret,
     module.terraform_cloud_token_secret,
   ]
 }
